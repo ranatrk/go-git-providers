@@ -77,3 +77,16 @@ func (opts *RepositoryCreateOptions) ValidateOptions() error {
 	}
 	return errs.Error()
 }
+
+// FilesGetOptions specifies optional options when fetcing files.
+type FilesGetOptions struct {
+	Recursive bool
+}
+type FilesGetOption func(*FilesGetOptions)
+
+func (opts *FilesGetOptions) ApplyFilesGetOptions(target *FilesGetOptions) {
+	// Go through each field in opts, and apply it to target if set
+	if opts.Recursive == true {
+		target.Recursive = opts.Recursive
+	}
+}
